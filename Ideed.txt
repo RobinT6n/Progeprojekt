@@ -37,3 +37,7 @@
 
 3.
     Mõtlesin ka korra, et teha OOP (Object Oriented Programming) viisiga seda, aga samas lihtsalt dictionary toimib ma arvan.
+
+
+3+1.2 -> 4
+    OOP ja folder süsteem.
