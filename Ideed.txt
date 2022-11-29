@@ -1,0 +1,24 @@
+1.
+    Paneks äkki faili teksti kirja nii:
+    {aastaX1:
+        {kuu:
+            {paev:
+                {tund:
+                    {minut:["kõik","erinevad","mis","samal","ajal"]
+                    }
+                    
+                }
+            }
+        },
+    aastaX2:{...}
+    }
+    Siis on võimalik dictionary abil sortida kiiremini, võime ka mingi prioriteedi asja teha.
+    Siin lihtsalt vaja teha for-loopid -> aasta; kuu, paev, tund, minut ja siis lihtsalt panna kõik samal ajal olevad ühele tasandile.
+
+2.
+    Võiks hakata seda koodi juba EasyGui või mingi graafilise asja peale ehitama, pärast vähem ümberehitamist. 
+    Seal poleks vaja ka seda MM-DD-YY asja, saaks lihtsalt võttagi aasta, kuu ja päeva kõik eraldi.
+    Kergem järjestada ja ei pea seda 0 sinna tekitama :D
+
+3.
+    Mõtlesin ka korra, et teha OOP (Object Oriented Programming) viisiga seda, aga samas lihtsalt dictionary toimib ma arvan.
