@@ -1,4 +1,4 @@
-1.
+1.1.
     Paneks äkki faili teksti kirja nii:
     {aastaX1:
         {kuu:
@@ -14,6 +14,21 @@
     }
     Siis on võimalik dictionary abil sortida kiiremini, võime ka mingi prioriteedi asja teha.
     Siin lihtsalt vaja teha for-loopid -> aasta; kuu, paev, tund, minut ja siis lihtsalt panna kõik samal ajal olevad ühele tasandile.
+
+    For x in range(1,1000):
+        if x in dictionary:
+            continue
+        else:
+            dictionary[x] = ylnimi
+
+1.2.
+    Kasutaks .JSON formaati, võimaldab äkki kergemini lugeda asju sisse
+    Fail läheks pikaks, solution järgmine rida.
+    Äkki teeks mingi folder süsteemi, mis läheb aasta -> kuu -> päev ja siis üks .JSON seal sees millel ül nimed ja kellaajad.
+    See annaks võimaluse neid kõiki ülesandeid eraldi muuta.
+    Kõik need eraldi folderid saab panna kõik ühte suurde.
+    Või samas saaks dictionary sisse panna igale ülesandele eraldi ID, mille abil siis saaks muuta neid(Refer to 1.1. viimane for loop).
+
 
 2.
     Võiks hakata seda koodi juba EasyGui või mingi graafilise asja peale ehitama, pärast vähem ümberehitamist. 
