@@ -1,6 +1,8 @@
 import os
 from datetime import datetime
-
+#
+# Sort(key=lambda x: x.aegkuni(), )
+#
 # class ylesanne:
 # 	def __init__(self, nimi, kuu, paev, aasta, tund, minut):
 # 		self.nimi = nimi
@@ -9,6 +11,8 @@ from datetime import datetime
 # 		self.aasta = aasta
 # 		self.tund = tund
 # 		self. minut = minut
+# 	def aegkuni():
+#
 
 
 failinimi = "andmed.txt"
