@@ -1,6 +1,7 @@
 import os
 from datetime import datetime
 #
+# print(datetime.now().timestamp())
 # Sort(key=lambda x: x.aegkuni(), )
 #
 # class ylesanne:
@@ -11,8 +12,8 @@ from datetime import datetime
 # 		self.aasta = aasta
 # 		self.tund = tund
 # 		self. minut = minut
-# 	def aegkuni():
-#
+# 	def aegkuni(self):
+# 		return
 
 
 failinimi = "andmed.txt"
