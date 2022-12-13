@@ -1,5 +1,5 @@
 #sellega on võimalik saada väärtused ning siis saab ka neid väärtusi veel edasi kuskile asetada või kasutada
-
+import uusvers
 from tkinter import *
 import tkinter
 
@@ -25,7 +25,7 @@ def nupu_vajutus_ei():
 	root4.destroy()
 	vaartus.append(1)
 
-while True:
+while True: 
 	sisu = []
 	vaartus = []
 	root = Tk()
@@ -37,8 +37,8 @@ while True:
 	root.mainloop()
 
 	root2 = Tk()
-	root2.title("kuupaeva sisestus")
-	sisestus2 = tkinter.Entry(root2, width=50)
+	root2.title("kuupaeva sisestus") 
+	sisestus2 = tkinter.Entry(root2, width=50) #See võiks olla kohe eraldi lahtritena - Päev, kuu, aasta
 	sisestus2.pack()
 	nupp2 = tkinter.Button(root2, text="Lisa kuupäev", width=48, command=nupu_vajutus_kuupaev)
 	nupp2.pack()
@@ -46,7 +46,7 @@ while True:
 
 	root3 = Tk()
 	root3.title("kellaaja sisestus")
-	sisestus3 = tkinter.Entry(root3, width=50)
+	sisestus3 = tkinter.Entry(root3, width=50) #See võiks ka olla kaks lahtrit - Tund, minut
 	sisestus3.pack()
 	nupp3 = tkinter.Button(root3, text="Lisa kellaaeg", width=48, command=nupu_vajutus_kellaaeg)
 	nupp3.pack()
