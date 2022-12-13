@@ -8,10 +8,11 @@ import os
 from datetime import datetime
 from tkinter import *
 from math import floor
+import tkinter_kood
 
 #MUUTUJAD:
 failinimi = "andmed.txt"
-objjrjnd = []
+obj_jrjnd = []
 
 
 
@@ -27,11 +28,11 @@ class Ylesanne:
 		self.tund = int(tund)
 		self.minut = int(minut)
 	def aegkuni(self):
-		aegkuni = math.floor(datetime(self.aasta,self.kuu,self.paev,self.tund,self.minut).timestamp() - datetime.now().timestamp())
+		aegkuni = datetime(self.aasta,self.kuu,self.paev,self.tund,self.minut).timestamp() - datetime.now().timestamp()
 		return aegkuni
 
 
-def loefailist(failinimi=failinimi, yljrjnd=objjrjnd):
+def loefailist(failinimi=failinimi, yljrjnd=obj_jrjnd): #Loeb failist järjendi ja teeb Ylessanne objektid, mille hoiustab yljrjnd ja siis tagastab selle
 	objekt = 0
 	fail = open(failinimi, 'r', encoding='UTF-8')
 	infojrjnd = fail.readlines().strip('\n')
@@ -42,11 +43,57 @@ def loefailist(failinimi=failinimi, yljrjnd=objjrjnd):
 	return yljrjnd
 
 
-def kirjutafaili(failinimi=failinimi,jrjnd=objjrjnd):
+def kirjutafaili(failinimi=failinimi,jrjnd=obj_jrjnd): # Kirjutab faili formaadis [[nimi, paev, kuu, aasta, tund, minut],[objekt2]...]
+	i = 0
 	fail = open(failinimi, 'w', encoding='UTF-8')
-	fail.write('[',jrjnd,']')
+	fail.write('[')
+	for yl in jrjnd:
+		if i > 0:
+			fail.write[',']
+		fail.write(f'[{yl.nimi},{yl.paev},{yl.kuu},{yl.aasta},{yl.tund},{yl.minut}]')
+		i+=1
+	fail.write(']')
 	fail.close()
 	return
+
+def kontrollikp(paev, kuu, aasta):
+	if int(kuu) in [1,3,5,7,8,10,12]:
+		if int(paev) > 0 and int(paev) <=31:
+			return True
+		else:
+			return False
+	elif int(kuu) in [4,6,9,11]:
+		if paev > 0 and paev <=30:
+			return True
+		else:
+			return False
+	elif int(kuu) == 2:
+		if (aasta % 400 == 0):
+			if paev > 0 and paev <= 29:
+				return True
+			else:
+				return False
+		elif (aasta % 100 != 0) and (aasta % 4 == 0):
+			if paev > 0 and paev <= 29:
+				return True
+			else:
+				return False
+		else:
+			if paev > 0 and paev <= 28:
+				return True
+			else:
+				return False
+	else:
+		return False
+
+def kontrollikell(tund, minut):
+	if tund < 0 or tund >= 24:
+		return False
+	if minut < 0 or minut >= 60:
+		return False
+	return True
+
+
 
 # IDEED
 #
@@ -72,34 +119,34 @@ with open(failinimi, "a" if eksisteerib else "w", encoding="UTF-8") as f: # Seda
 			kuu,paev,aasta = kuupaev.split("-") #Üldiselt jääb suht sarnaseks
 			kuu,paev,aasta = int(kuu),int(paev),int(aasta)
 			aasta = int("20"+str(aasta).zfill(2))
-			if int(kuu) in [1,3,5,7,8,10,12]:
-				if int(paev) > 0 and int(paev) <=31:
-					continue
-				else:
-					raise ValueError(f"Teie sisestatud kuupäev {kuupaev} ei ole korrektne")
-			elif int(kuu) in [4,6,9,11]:
-				if paev > 0 and paev <=30:
-					continue
-				else:
-					raise ValueError(f"Teie sisestatud kuupäev {kuupaev} ei ole korrektne")
-			elif int(kuu) == 2:
-				if (aasta % 400 == 0):
-					if paev > 0 and paev <= 29:
-						continue
-					else:
-						raise ValueError(f"Teie sisestatud kuupäev {kuupaev} ei ole korrektne")
-				elif (aasta % 100 != 0) and (aasta % 4 == 0):
-					if paev > 0 and paev <= 29:
-						continue
-					else:
-						raise ValueError(f"Teie sisestatud kuupäev {kuupaev} ei ole korrektne")
-				else:
-					if paev > 0 and paev <= 28:
-						continue
-					else:
-						raise ValueError(f"Teie sisestatud kuupäev {kuupaev} ei ole korrektne")
-			else:
-				raise ValueError(f"Teie sisestatud kuupäev {kuupaev} ei ole korrektne")
+			# if int(kuu) in [1,3,5,7,8,10,12]: #Kogu see osa on nüüd funktsioon kontrollikp(), mis korrektse kuupäeva korral returnib True
+			# 	if int(paev) > 0 and int(paev) <=31:
+			# 		continue
+			# 	else:
+			# 		raise ValueError(f"Teie sisestatud kuupäev {kuupaev} ei ole korrektne")
+			# elif int(kuu) in [4,6,9,11]:
+			# 	if paev > 0 and paev <=30:
+			# 		continue
+			# 	else:
+			# 		raise ValueError(f"Teie sisestatud kuupäev {kuupaev} ei ole korrektne")
+			# elif int(kuu) == 2:
+			# 	if (aasta % 400 == 0):
+			# 		if paev > 0 and paev <= 29:
+			# 			continue
+			# 		else:
+			# 			raise ValueError(f"Teie sisestatud kuupäev {kuupaev} ei ole korrektne")
+			# 	elif (aasta % 100 != 0) and (aasta % 4 == 0):
+			# 		if paev > 0 and paev <= 29:
+			# 			continue
+			# 		else:
+			# 			raise ValueError(f"Teie sisestatud kuupäev {kuupaev} ei ole korrektne")
+			# 	else:
+			# 		if paev > 0 and paev <= 28:
+			# 			continue
+			# 		else:
+			# 			raise ValueError(f"Teie sisestatud kuupäev {kuupaev} ei ole korrektne")
+			# else:
+			# 	raise ValueError(f"Teie sisestatud kuupäev {kuupaev} ei ole korrektne") #Kuni siiani siis kontrollikp()
 			aasta = int(str(aasta)[-2:])
 			
 			# kuupaev = input("Sisesta kuupäev(MM-PP-YY): ") #Algne
