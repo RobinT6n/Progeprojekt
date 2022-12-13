@@ -1,19 +1,43 @@
 import os
 from datetime import datetime
+from tkinter import *
+from math import floor
+
+class Ylesanne:
+	def __init__(self, nimi, paev, kuu, aasta, tund, minut):
+		self.nimi = nimi
+		self.kuu = int(kuu)
+		self.paev = int(paev)
+		self.aasta = int(aasta)
+		self.tund = int(tund)
+		self.minut = int(minut)
+	def aegkuni(self):
+		aegkuni = math.floor(datetime(self.aasta,self.kuu,self.paev,self.tund,self.minut).timestamp() - datetime.now().timestamp())
+		return aegkuni
+
+
+def loefailist(failinimi):
+	yljrjnd = []
+	objekt = 0
+	fail = open(failinimi, 'r', encoding='UTF-8')
+	infojrjnd = fail.readlines().strip('\n')
+	fail.close()
+	for ylesanne in infojrjnd:
+		objekt = Ylesanne(str(ylesanne[0]),int(ylesanne[1]),int(ylesanne[2]),int(ylesanne[3]),int(ylesanne[4]),int(ylesanne[5]))
+		yljrjnd.append(objekt)
+	return yljrjnd
+
+
+def kirjutafaili(failinimi,jrjnd):
+	fail = open(failinimi, 'w', encoding='UTF-8')
+	fail.write('[',jrjnd,']')
+	fail.close()
+	return
 #
-# print(datetime.now().timestamp())
+print(datetime(2022,12,14,19,45).timestamp() - datetime.now().timestamp()) # See kuidas pärast saame "Aegkuni" kätte. Lihtsalt vaja teha formatimist veits (Päev, tund, minut)
 # Sort(key=lambda x: x.aegkuni(), )
 #
-# class ylesanne:
-# 	def __init__(self, nimi, kuu, paev, aasta, tund, minut):
-# 		self.nimi = nimi
-# 		self.kuu = kuu
-# 		self.paev = paev
-# 		self.aasta = aasta
-# 		self.tund = tund
-# 		self. minut = minut
-# 	def aegkuni(self):
-# 		return
+
 
 
 failinimi = "andmed.txt"
@@ -115,3 +139,4 @@ kellade_indeksid = kellad[:]
 #	eraldi = kellade_listid.split(":")
 #	return eraldi[0], eraldi[1]
 #kellad.sort(key=sorteeri_kellad)
+
