@@ -1,8 +1,23 @@
+#PROGRAMM: Ajaplaneerimise abiline
+#AUTORID:
+#	KRISTJAN NOORMETS
+#	ROBIN TÕNISTE
+
+
 import os
 from datetime import datetime
 from tkinter import *
 from math import floor
 
+#MUUTUJAD:
+failinimi = "andmed.txt"
+objjrjnd = []
+
+
+
+
+
+#FUNKTSIOONID JA KLASSID
 class Ylesanne:
 	def __init__(self, nimi, paev, kuu, aasta, tund, minut):
 		self.nimi = nimi
@@ -16,8 +31,7 @@ class Ylesanne:
 		return aegkuni
 
 
-def loefailist(failinimi):
-	yljrjnd = []
+def loefailist(failinimi=failinimi, yljrjnd=objjrjnd):
 	objekt = 0
 	fail = open(failinimi, 'r', encoding='UTF-8')
 	infojrjnd = fail.readlines().strip('\n')
@@ -28,32 +42,34 @@ def loefailist(failinimi):
 	return yljrjnd
 
 
-def kirjutafaili(failinimi,jrjnd):
+def kirjutafaili(failinimi=failinimi,jrjnd=objjrjnd):
 	fail = open(failinimi, 'w', encoding='UTF-8')
 	fail.write('[',jrjnd,']')
 	fail.close()
 	return
+
+# IDEED
 #
-print(datetime(2022,12,14,19,45).timestamp() - datetime.now().timestamp()) # See kuidas pärast saame "Aegkuni" kätte. Lihtsalt vaja teha formatimist veits (Päev, tund, minut)
-# Sort(key=lambda x: x.aegkuni(), )
+# print(datetime(2022,12,14,19,45).timestamp() - datetime.now().timestamp()) # See kuidas pärast saame "Aegkuni" kätte. Lihtsalt vaja teha formatimist veits (Päev, tund, minut)
+# Sort(key=lambda x: x.aegkuni(), ) #Imeline viis sorteerida kogu classi Ylesanne objektide järjend
 #
 
+#MAIN PROGRAMMI OSA
 
-
-failinimi = "andmed.txt"
+# Pigem pole vaja
 #true või false
 eksisteerib = os.path.exists(failinimi)
 
-with open(failinimi, "a" if eksisteerib else "w", encoding="UTF-8") as f:
+with open(failinimi, "a" if eksisteerib else "w", encoding="UTF-8") as f: # Seda ka pigem pole vaja
 	while True:
 		sisestus = input("Sisesta ülesanne: ")
 		try:
 			# Mõtlesin äkki võtta see kuupäev tükkideks lahti, siis äkki kergem sorteerida neid 
-			# Põhimõtteliselt saab selle 'kuu,paev,aasta' osa muuta tagasi MM-DD-YY formaati faili kirjutamisel.
+			# Põhimõtteliselt saab selle 'kuu,paev,aasta' osa muuta tagasi MM-DD-YYYY formaati faili kirjutamisel.
 			# Selle asjaga saab lihtsalt checkida kas kuupäev on normaalne.
 			#
 			kuupaev = input("Sisesta kuupäev(MM-PP-YYYY): ") #Algne
-			kuu,paev,aasta = kuupaev.split("-")
+			kuu,paev,aasta = kuupaev.split("-") #Üldiselt jääb suht sarnaseks
 			kuu,paev,aasta = int(kuu),int(paev),int(aasta)
 			aasta = int("20"+str(aasta).zfill(2))
 			if int(kuu) in [1,3,5,7,8,10,12]:
@@ -99,6 +115,11 @@ with open(failinimi, "a" if eksisteerib else "w", encoding="UTF-8") as f:
 			jatkuvus = input("Tahad veel ülesandeid lisada(y - jah, n - ei)? ")
 			if jatkuvus.lower() == "n":
 				break
+
+
+
+
+#ALGNE KOOD
 
 # jarjend = []
 # jarjend2 = []
