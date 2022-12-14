@@ -40,10 +40,12 @@ def loefailist(failinimi=failinimi, yljrjnd=obj_jrjnd): #Loeb failist järjendi 
 	for ylesanne in infojrjnd:
 		objekt = Ylesanne(str(ylesanne[0]),int(ylesanne[1]),int(ylesanne[2]),int(ylesanne[3]),int(ylesanne[4]),int(ylesanne[5]))
 		yljrjnd.append(objekt)
+	yljrjnd.sort(key=lambda x: x.aegkuni())
 	return yljrjnd
 
 
 def kirjutafaili(failinimi=failinimi,jrjnd=obj_jrjnd): # Kirjutab faili formaadis [[nimi, paev, kuu, aasta, tund, minut],[objekt2]...]
+	obj_jrjnd.sort(key=lambda x: x.aegkuni())
 	i = 0
 	fail = open(failinimi, 'w', encoding='UTF-8')
 	fail.write('[')
@@ -96,8 +98,8 @@ def kontrollikell(tund, minut):
 
 def loojalisaobjekt(nimi, paev, kuu, aasta, tund, minut, jrjnd=obj_jrjnd):
 	lisaobjekt = Ylesanne(nimi, paev, kuu, aasta, tund, minut)
-	obj_jrjnd.append(lisaobjekt)
-	return obj_jrjnd
+	jrjnd.append(lisaobjekt)
+	return jrjnd
 
 # IDEED
 #
