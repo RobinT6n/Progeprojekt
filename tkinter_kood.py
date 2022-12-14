@@ -26,6 +26,7 @@ def nupu_vajutus_ei():
 	vaartus.append(1)
 
 andmed = []
+jarjestatud_andmed = []
 while True: 
 	sisu = []
 	vaartus = []
@@ -66,5 +67,13 @@ while True:
 		#siia peaks nt lisama selle, et kui fail olemas, ss lisab faili ("a"), muidu kui pole faili olemas, siis kirjutab uue faili("w")
 		with open("andmete_fail.txt", "w", encoding="utf8") as f:
 			for i in andmed:
-				f.write(f"Ülesanne: {i[0]}, kuupäev: {i[1]}, kellaaeg: {i[2]}")
+				ulesanne = i[0]
+				dates = i[1].split("-")
+				paev = dates[1]
+				kuu = dates[0]
+				aasta = dates[2]
+				ajad = i[2].split(":")
+				tund = ajad[0]
+				minut = ajad[1]
+				f.write(f"Ülesanne: {ulesanne}, päev: {paev}, kuu: {kuu}, aasta: {aasta}, tund:{tund}, minutid: {minut}\n")
 		break
