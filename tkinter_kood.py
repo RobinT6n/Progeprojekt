@@ -1,4 +1,9 @@
-#sellega on võimalik saada väärtused ning siis saab ka neid väärtusi veel edasi kuskile asetada või kasutada
+#PROGRAMM: Ajaplaneerimise abiline
+#AUTORID:
+#	KRISTJAN NOORMETS
+#	ROBIN TÕNISTE
+
+
 import uusvers as uv
 from tkinter import *
 import tkinter
