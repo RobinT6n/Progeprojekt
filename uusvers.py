@@ -8,7 +8,6 @@ import os
 from datetime import datetime
 from tkinter import *
 from math import floor
-import tkinter_kood
 
 #MUUTUJAD:
 failinimi = "andmed.txt"
@@ -33,16 +32,18 @@ class Ylesanne:
 
 
 def loefailist(failinimi=failinimi, yljrjnd=obj_jrjnd): #Loeb failist järjendi ja teeb Ylessanne objektid, mille hoiustab yljrjnd ja siis tagastab selle
-	objekt = 0
-	fail = open(failinimi, 'r', encoding='UTF-8')
-	infojrjnd = fail.readlines().strip('\n')
-	fail.close()
-	for ylesanne in infojrjnd:
-		objekt = Ylesanne(str(ylesanne[0]),int(ylesanne[1]),int(ylesanne[2]),int(ylesanne[3]),int(ylesanne[4]),int(ylesanne[5]))
-		yljrjnd.append(objekt)
-	yljrjnd.sort(key=lambda x: x.aegkuni())
-	return yljrjnd
-
+	try:
+		objekt = 0
+		fail = open(failinimi, 'r', encoding='UTF-8')
+		infojrjnd = fail.readlines().strip('\n')
+		fail.close()
+		for ylesanne in infojrjnd:
+			objekt = Ylesanne(str(ylesanne[0]),int(ylesanne[1]),int(ylesanne[2]),int(ylesanne[3]),int(ylesanne[4]),int(ylesanne[5]))
+			yljrjnd.append(objekt)
+		yljrjnd.sort(key=lambda x: x.aegkuni())
+		return yljrjnd
+	except:
+		return []
 
 def kirjutafaili(failinimi=failinimi,jrjnd=obj_jrjnd): # Kirjutab faili formaadis [[nimi, paev, kuu, aasta, tund, minut],[objekt2]...]
 	obj_jrjnd.sort(key=lambda x: x.aegkuni())
