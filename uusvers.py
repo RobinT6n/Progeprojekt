@@ -46,7 +46,7 @@ def loefailist(failinimi=failinimi, yljrjnd=obj_jrjnd): #Loeb failist järjendi 
 		return []
 
 def kirjutafaili(failinimi=failinimi,jrjnd=obj_jrjnd): # Kirjutab faili formaadis [[nimi, paev, kuu, aasta, tund, minut],[objekt2]...]
-	obj_jrjnd.sort(key=lambda x: x.aegkuni())
+	jrjnd.sort(key=lambda x: x.aegkuni())
 	i = 0
 	fail = open(failinimi, 'w', encoding='UTF-8')
 	fail.write('[')
@@ -105,7 +105,7 @@ def loojalisaobjekt(nimi, paev, kuu, aasta, tund, minut, jrjnd=obj_jrjnd):
 # IDEED
 #
 # print(datetime(2022,12,14,19,45).timestamp() - datetime.now().timestamp()) # See kuidas pärast saame "Aegkuni" kätte. Lihtsalt vaja teha formatimist veits (Päev, tund, minut)
-# Sort(key=lambda x: x.aegkuni(), ) #Imeline viis sorteerida kogu classi Ylesanne objektide järjend
+# Sort(key=lambda x: x.aegkuni(), ) #Imeline viis sorteerida kogu classi Ylesanne objektide järjend - done
 #
 
 #MAIN PROGRAMMI OSA?
