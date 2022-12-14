@@ -3,6 +3,11 @@ import uusvers
 from tkinter import *
 import tkinter
 
+#MUUTUJAD:
+obj_jrjnd = uusvers.obj_jrjnd
+
+
+#FUNKTSIOONID JA KLASSID
 def nupu_vajutus_ulesanne():
 	ulesanne = sisestus.get()
 	sisu.append(ulesanne)

@@ -94,6 +94,10 @@ def kontrollikell(tund, minut):
 	return True
 
 
+def loojalisaobjekt(nimi, paev, kuu, aasta, tund, minut, jrjnd=obj_jrjnd):
+	lisaobjekt = Ylesanne(nimi, paev, kuu, aasta, tund, minut)
+	obj_jrjnd.append(lisaobjekt)
+	return obj_jrjnd
 
 # IDEED
 #
@@ -101,72 +105,78 @@ def kontrollikell(tund, minut):
 # Sort(key=lambda x: x.aegkuni(), ) #Imeline viis sorteerida kogu classi Ylesanne objektide järjend
 #
 
-#MAIN PROGRAMMI OSA
+#MAIN PROGRAMMI OSA?
 
-# Pigem pole vaja
-#true või false
-eksisteerib = os.path.exists(failinimi)
-
-with open(failinimi, "a" if eksisteerib else "w", encoding="UTF-8") as f: # Seda ka pigem pole vaja
-	while True:
-		sisestus = input("Sisesta ülesanne: ")
-		try:
-			# Mõtlesin äkki võtta see kuupäev tükkideks lahti, siis äkki kergem sorteerida neid 
-			# Põhimõtteliselt saab selle 'kuu,paev,aasta' osa muuta tagasi MM-DD-YYYY formaati faili kirjutamisel.
-			# Selle asjaga saab lihtsalt checkida kas kuupäev on normaalne.
-			#
-			kuupaev = input("Sisesta kuupäev(MM-PP-YYYY): ") #Algne
-			kuu,paev,aasta = kuupaev.split("-") #Üldiselt jääb suht sarnaseks
-			kuu,paev,aasta = int(kuu),int(paev),int(aasta)
-			aasta = int("20"+str(aasta).zfill(2))
-			# if int(kuu) in [1,3,5,7,8,10,12]: #Kogu see osa on nüüd funktsioon kontrollikp(), mis korrektse kuupäeva korral returnib True
-			# 	if int(paev) > 0 and int(paev) <=31:
-			# 		continue
-			# 	else:
-			# 		raise ValueError(f"Teie sisestatud kuupäev {kuupaev} ei ole korrektne")
-			# elif int(kuu) in [4,6,9,11]:
-			# 	if paev > 0 and paev <=30:
-			# 		continue
-			# 	else:
-			# 		raise ValueError(f"Teie sisestatud kuupäev {kuupaev} ei ole korrektne")
-			# elif int(kuu) == 2:
-			# 	if (aasta % 400 == 0):
-			# 		if paev > 0 and paev <= 29:
-			# 			continue
-			# 		else:
-			# 			raise ValueError(f"Teie sisestatud kuupäev {kuupaev} ei ole korrektne")
-			# 	elif (aasta % 100 != 0) and (aasta % 4 == 0):
-			# 		if paev > 0 and paev <= 29:
-			# 			continue
-			# 		else:
-			# 			raise ValueError(f"Teie sisestatud kuupäev {kuupaev} ei ole korrektne")
-			# 	else:
-			# 		if paev > 0 and paev <= 28:
-			# 			continue
-			# 		else:
-			# 			raise ValueError(f"Teie sisestatud kuupäev {kuupaev} ei ole korrektne")
-			# else:
-			# 	raise ValueError(f"Teie sisestatud kuupäev {kuupaev} ei ole korrektne") #Kuni siiani siis kontrollikp()
-			aasta = int(str(aasta)[-2:])
-			
-			# kuupaev = input("Sisesta kuupäev(MM-PP-YY): ") #Algne
-			kellaaeg = input("Sisesta kellaaeg(00:00): ")
-			tund, minut = kellaaeg.split(":")
-			f.write(f"Ülesanne: {sisestus}, Kuupäev: {kuupaev}, Kellaaeg: {kellaaeg}\n")  #Algne
-			# f.write(f"Ülesanne: {sisestus}, Kuupäev: {(str(kuu).zfill(2))}-{paev}-{aasta}, Kellaaeg: {kellaaeg}\n") #Tagasi MM-DD-YY formaati. Pole vaja, tuli parem idee
-			jatkuvus = input("Tahad veel ülesandeid lisada(y - jah, n - ei)? ")
-			if jatkuvus.lower() == "n":
-				break
-		except ValueError as v:
-			print(f"Tekkis viga: {v}.\nKontrolli sisestatud tekst üle!")
-			jatkuvus = input("Tahad veel ülesandeid lisada(y - jah, n - ei)? ")
-			if jatkuvus.lower() == "n":
-				break
 
 
 
 
 #ALGNE KOOD
+
+# # Pigem pole vaja
+# #true või false
+# eksisteerib = os.path.exists(failinimi)
+
+# with open(failinimi, "a" if eksisteerib else "w", encoding="UTF-8") as f: # Seda ka pigem pole vaja
+# 	while True:
+# 		sisestus = input("Sisesta ülesanne: ")
+# 		try:
+# 			# Mõtlesin äkki võtta see kuupäev tükkideks lahti, siis äkki kergem sorteerida neid 
+# 			# Põhimõtteliselt saab selle 'kuu,paev,aasta' osa muuta tagasi MM-DD-YYYY formaati faili kirjutamisel.
+# 			# Selle asjaga saab lihtsalt checkida kas kuupäev on normaalne.
+# 			#
+# 			kuupaev = input("Sisesta kuupäev(MM-PP-YYYY): ") #Algne
+# 			kuu,paev,aasta = kuupaev.split("-") #Üldiselt jääb suht sarnaseks
+# 			kuu,paev,aasta = int(kuu),int(paev),int(aasta)
+# 			aasta = int("20"+str(aasta).zfill(2))
+# 			# if int(kuu) in [1,3,5,7,8,10,12]: #Kogu see osa on nüüd funktsioon kontrollikp(), mis korrektse kuupäeva korral returnib True
+# 			# 	if int(paev) > 0 and int(paev) <=31:
+# 			# 		continue
+# 			# 	else:
+# 			# 		raise ValueError(f"Teie sisestatud kuupäev {kuupaev} ei ole korrektne")
+# 			# elif int(kuu) in [4,6,9,11]:
+# 			# 	if paev > 0 and paev <=30:
+# 			# 		continue
+# 			# 	else:
+# 			# 		raise ValueError(f"Teie sisestatud kuupäev {kuupaev} ei ole korrektne")
+# 			# elif int(kuu) == 2:
+# 			# 	if (aasta % 400 == 0):
+# 			# 		if paev > 0 and paev <= 29:
+# 			# 			continue
+# 			# 		else:
+# 			# 			raise ValueError(f"Teie sisestatud kuupäev {kuupaev} ei ole korrektne")
+# 			# 	elif (aasta % 100 != 0) and (aasta % 4 == 0):
+# 			# 		if paev > 0 and paev <= 29:
+# 			# 			continue
+# 			# 		else:
+# 			# 			raise ValueError(f"Teie sisestatud kuupäev {kuupaev} ei ole korrektne")
+# 			# 	else:
+# 			# 		if paev > 0 and paev <= 28:
+# 			# 			continue
+# 			# 		else:
+# 			# 			raise ValueError(f"Teie sisestatud kuupäev {kuupaev} ei ole korrektne")
+# 			# else:
+# 			# 	raise ValueError(f"Teie sisestatud kuupäev {kuupaev} ei ole korrektne") #Kuni siiani siis kontrollikp()
+# 			aasta = int(str(aasta)[-2:])
+			
+# 			# kuupaev = input("Sisesta kuupäev(MM-PP-YY): ") #Algne
+# 			kellaaeg = input("Sisesta kellaaeg(00:00): ")
+# 			tund, minut = kellaaeg.split(":")
+# 			f.write(f"Ülesanne: {sisestus}, Kuupäev: {kuupaev}, Kellaaeg: {kellaaeg}\n")  #Algne
+# 			# f.write(f"Ülesanne: {sisestus}, Kuupäev: {(str(kuu).zfill(2))}-{paev}-{aasta}, Kellaaeg: {kellaaeg}\n") #Tagasi MM-DD-YY formaati. Pole vaja, tuli parem idee
+# 			jatkuvus = input("Tahad veel ülesandeid lisada(y - jah, n - ei)? ")
+# 			if jatkuvus.lower() == "n":
+# 				break
+# 		except ValueError as v:
+# 			print(f"Tekkis viga: {v}.\nKontrolli sisestatud tekst üle!")
+# 			jatkuvus = input("Tahad veel ülesandeid lisada(y - jah, n - ei)? ")
+# 			if jatkuvus.lower() == "n":
+# 				break
+
+
+
+
+
 
 # jarjend = []
 # jarjend2 = []
