@@ -25,6 +25,7 @@ def nupu_vajutus_ei():
 	root4.destroy()
 	vaartus.append(1)
 
+andmed = []
 while True: 
 	sisu = []
 	vaartus = []
@@ -52,7 +53,7 @@ while True:
 	nupp3.pack()
 	root3.mainloop()
 
-	print(sisu)
+	andmed.append(sisu)
 
 	root4 = Tk()
 	root4.title("Jätkuvus")
@@ -63,4 +64,8 @@ while True:
 	nuppei.pack()
 	root4.mainloop()
 	if len(vaartus) == 1:
+		#siia peaks nt lisama selle, et kui fail olemas, ss lisab faili ("a"), muidu kui pole faili olemas, siis kirjutab uue faili("w")
+		with open("andmete_fail.txt", "w", encoding="utf8") as f:
+			for i in andmed:
+				f.write(i)
 		break
