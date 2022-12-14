@@ -1,13 +1,16 @@
 #sellega on võimalik saada väärtused ning siis saab ka neid väärtusi veel edasi kuskile asetada või kasutada
-import uusvers
+import uusvers as uv
 from tkinter import *
 import tkinter
 
 #MUUTUJAD:
-obj_jrjnd = uusvers.obj_jrjnd
+obj_jrjnd=uv.obj_jrjnd
 
 
-#FUNKTSIOONID JA KLASSID
+# FUNKTSIOONID JA KLASSID
+
+
+# NUPPUDE FUNKTSIOONID
 def nupu_vajutus_ulesanne():
 	ulesanne = sisestus.get()
 	sisu.append(ulesanne)
@@ -30,8 +33,14 @@ def nupu_vajutus_ei():
 	root4.destroy()
 	vaartus.append(1)
 
+
+
+#MAIN PROGRAMMI OSA
+obj_jrjnd = uv.loefailist()
+
 andmed = []
 jarjestatud_andmed = []
+
 while True: 
 	sisu = []
 	vaartus = []
