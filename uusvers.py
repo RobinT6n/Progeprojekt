@@ -35,12 +35,13 @@ def loefailist(failinimi=failinimi, yljrjnd=obj_jrjnd): #Loeb failist järjendi 
 	try:
 		objekt = 0
 		fail = open(failinimi, 'r', encoding='UTF-8')
-		infojrjnd = fail.readlines().strip('\n')
-		fail.close()
-		for ylesanne in infojrjnd:
-			objekt = Ylesanne(str(ylesanne[0]),int(ylesanne[1]),int(ylesanne[2]),int(ylesanne[3]),int(ylesanne[4]),int(ylesanne[5]))
+		for rida in fail:
+			infojrjnd = rida.strip("\n").split(";")
+			print(infojrjnd)
+			objekt = Ylesanne(str(infojrjnd[0]),int(infojrjnd[1]),int(infojrjnd[2]),int(infojrjnd[3]),int(infojrjnd[4]),int(infojrjnd[5]))
 			yljrjnd.append(objekt)
 		yljrjnd.sort(key=lambda x: x.aegkuni())
+		fail.close()
 		return yljrjnd
 	except:
 		return []
@@ -49,52 +50,61 @@ def kirjutafaili(failinimi=failinimi,jrjnd=obj_jrjnd): # Kirjutab faili formaadi
 	jrjnd.sort(key=lambda x: x.aegkuni())
 	i = 0
 	fail = open(failinimi, 'w', encoding='UTF-8')
-	fail.write('[')
 	for yl in jrjnd:
 		if i > 0:
-			fail.write[',']
-		fail.write(f'[{yl.nimi},{yl.paev},{yl.kuu},{yl.aasta},{yl.tund},{yl.minut}]')
+			fail.write['\n']
+		fail.writelines(f'{str(yl.nimi)}";{yl.paev};{yl.kuu};{yl.aasta};{yl.tund};{yl.minut}')
 		i+=1
-	fail.write(']')
 	fail.close()
 	return
 
 def kontrollikp(paev, kuu, aasta):
-	if int(kuu) in [1,3,5,7,8,10,12]:
-		if int(paev) > 0 and int(paev) <=31:
-			return True
+	try:
+		paev=int(paev)
+		kuu=int(kuu)
+		aasta=int(aasta)
+		if int(kuu) in [1,3,5,7,8,10,12]:
+			if int(paev) > 0 and int(paev) <=31:
+				return True
+			else:
+				return False
+		elif int(kuu) in [4,6,9,11]:
+			if paev > 0 and paev <=30:
+				return True
+			else:
+				return False
+		elif int(kuu) == 2:
+			if (aasta % 400 == 0):
+				if paev > 0 and paev <= 29:
+					return True
+				else:
+					return False
+			elif (aasta % 100 != 0) and (aasta % 4 == 0):
+				if paev > 0 and paev <= 29:
+					return True
+				else:
+					return False
+			else:
+				if paev > 0 and paev <= 28:
+					return True
+				else:
+					return False
 		else:
 			return False
-	elif int(kuu) in [4,6,9,11]:
-		if paev > 0 and paev <=30:
-			return True
-		else:
-			return False
-	elif int(kuu) == 2:
-		if (aasta % 400 == 0):
-			if paev > 0 and paev <= 29:
-				return True
-			else:
-				return False
-		elif (aasta % 100 != 0) and (aasta % 4 == 0):
-			if paev > 0 and paev <= 29:
-				return True
-			else:
-				return False
-		else:
-			if paev > 0 and paev <= 28:
-				return True
-			else:
-				return False
-	else:
+	except:
 		return False
 
 def kontrollikell(tund, minut):
-	if tund < 0 or tund >= 24:
+	try:
+		tund=int(tund)
+		minut=int(minut)
+		if tund < 0 or tund >= 24:
+			return False
+		if minut < 0 or minut >= 60:
+			return False
+		return True
+	except:
 		return False
-	if minut < 0 or minut >= 60:
-		return False
-	return True
 
 
 def loojalisaobjekt(nimi, paev, kuu, aasta, tund, minut, jrjnd=obj_jrjnd):
@@ -104,13 +114,11 @@ def loojalisaobjekt(nimi, paev, kuu, aasta, tund, minut, jrjnd=obj_jrjnd):
 
 # IDEED
 #
-# print(datetime(2022,12,14,19,45).timestamp() - datetime.now().timestamp()) # See kuidas pärast saame "Aegkuni" kätte. Lihtsalt vaja teha formatimist veits (Päev, tund, minut)
+#print(datetime(2022,12,14,19,45).timestamp() - datetime.now().timestamp()) # See kuidas pärast saame "Aegkuni" kätte. Lihtsalt vaja teha formatimist veits (Päev, tund, minut)
 # Sort(key=lambda x: x.aegkuni(), ) #Imeline viis sorteerida kogu classi Ylesanne objektide järjend - done
 #
 
 #MAIN PROGRAMMI OSA?
-
-
 
 
 
