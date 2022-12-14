@@ -85,7 +85,6 @@ def lisaylesanne():
 
 #MAIN PROGRAMMI OSA
 obj_jrjnd = uv.loefailist()
-print(obj_jrjnd)
 
 lisaylesanne()
 

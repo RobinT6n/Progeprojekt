@@ -37,7 +37,6 @@ def loefailist(failinimi=failinimi, yljrjnd=obj_jrjnd): #Loeb failist järjendi 
 		fail = open(failinimi, 'r', encoding='UTF-8')
 		for rida in fail:
 			infojrjnd = rida.strip("\n").split(";")
-			print(infojrjnd)
 			objekt = Ylesanne(str(infojrjnd[0]),int(infojrjnd[1]),int(infojrjnd[2]),int(infojrjnd[3]),int(infojrjnd[4]),int(infojrjnd[5]))
 			yljrjnd.append(objekt)
 		yljrjnd.sort(key=lambda x: x.aegkuni())
@@ -47,13 +46,13 @@ def loefailist(failinimi=failinimi, yljrjnd=obj_jrjnd): #Loeb failist järjendi 
 		return []
 
 def kirjutafaili(failinimi=failinimi,jrjnd=obj_jrjnd): # Kirjutab faili formaadis [[nimi, paev, kuu, aasta, tund, minut],[objekt2]...]
+	i=0
 	jrjnd.sort(key=lambda x: x.aegkuni())
-	i = 0
 	fail = open(failinimi, 'w', encoding='UTF-8')
 	for yl in jrjnd:
-		if i > 0:
-			fail.write['\n']
-		fail.writelines(f'{str(yl.nimi)}";{yl.paev};{yl.kuu};{yl.aasta};{yl.tund};{yl.minut}')
+		if i>0:
+			fail.write("\n")
+		fail.write(f'{str(yl.nimi)};{yl.paev};{yl.kuu};{yl.aasta};{yl.tund};{yl.minut}')
 		i+=1
 	fail.close()
 	return
