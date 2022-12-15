@@ -9,12 +9,7 @@ import tkinter as tki
 
 #MUUTUJAD:
 obj_jrjnd=uv.obj_jrjnd
-
-
-# NUPPUDE FUNKTSIOONID
-
-
-
+running: True
 
 # FUNKTSIOONID JA KLASSID
 def lisaylesanne():
@@ -79,6 +74,11 @@ def lisaylesanne():
 	root.mainloop()
 
 
+def sulgemine():
+	global running
+	uv.kirjutafaili(jrjnd=obj_jrjnd)
+	running = False
+	root.destroy()
 
 
 
@@ -86,8 +86,14 @@ def lisaylesanne():
 #MAIN PROGRAMMI OSA
 obj_jrjnd = uv.loefailist()
 
-lisaylesanne()
+while running:
+	root = tki.Tk()
+	root.protocol("WM_DELETE_WINDOW",sulgemine)
+	
 
+
+
+	root.mainloop()
 # andmed = []
 # jarjestatud_andmed = []
 # while True: 

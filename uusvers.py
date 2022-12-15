@@ -6,7 +6,6 @@
 
 import os
 from datetime import datetime
-from tkinter import *
 from math import floor
 
 #MUUTUJAD:
@@ -26,6 +25,11 @@ class Ylesanne:
 		self.aasta = int(aasta)
 		self.tund = int(tund)
 		self.minut = int(minut)
+	def __str__(self):
+		ajastamp = self.aegkuni()
+		if ajastamp < 0:
+			return f"{self.paev}.{self.kuu}.{self.aasta} {self.tund}:{self.minut}	{self.nimi}	MÖÖDUNUD"
+		return f"{self.paev}.{self.kuu}.{self.aasta} {self.tund}:{self.minut}	{self.nimi}	{floor(ajastamp/(60*60*24))}P {floor((ajastamp%(60*60*24)/(60*60)))}T {floor((ajastamp%(60*60)/(60)))}M"
 	def aegkuni(self):
 		aegkuni = datetime(self.aasta,self.kuu,self.paev,self.tund,self.minut).timestamp() - datetime.now().timestamp()
 		return aegkuni
@@ -118,7 +122,6 @@ def loojalisaobjekt(nimi, paev, kuu, aasta, tund, minut, jrjnd=obj_jrjnd):
 #
 
 #MAIN PROGRAMMI OSA?
-
 
 
 #ALGNE KOOD
