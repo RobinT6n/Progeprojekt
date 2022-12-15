@@ -8,11 +8,12 @@ import uusvers as uv
 import tkinter as tki
 
 #MUUTUJAD:
-obj_jrjnd=uv.obj_jrjnd
-running: True
+obj_jrjnd = uv.obj_jrjnd
+running = True
 
 # FUNKTSIOONID JA KLASSID
 def lisaylesanne():
+	global listbox_tegevused
 	def lisalisti():
 		ylnimi = nimi.get()
 		ylpaev = paev.get()
@@ -24,6 +25,7 @@ def lisaylesanne():
 			if uv.kontrollikell(yltund, ylminut):
 				uv.loojalisaobjekt(ylnimi, ylpaev, ylkuu, ylaasta, yltund, ylminut, jrjnd=obj_jrjnd)
 				uv.kirjutafaili(jrjnd=obj_jrjnd)
+				listboxyl()
 				root.destroy()
 			else:
 				def kellboom():
@@ -72,6 +74,13 @@ def lisaylesanne():
 	lisa = tki.Button(root, text="Lisa", width=10, command=lisalisti)
 	lisa.place(x=210,y=95)
 	root.mainloop()
+	
+
+def kustutaylesanne():
+	indeks = listbox_tegevused.curselection()[0]
+	del obj_jrjnd[indeks]
+	listbox_tegevused.delete(indeks)
+
 
 
 def sulgemine():
@@ -80,7 +89,12 @@ def sulgemine():
 	running = False
 	root.destroy()
 
-
+def listboxyl():
+	global obj_jrjnd
+	global listbox_tegevused
+	listbox_tegevused.delete(0,tki.END)
+	for objekt in obj_jrjnd:
+		listbox_tegevused.insert(tki.END, objekt.__str__())
 
 
 #MAIN PROGRAMMI OSA
@@ -89,11 +103,33 @@ obj_jrjnd = uv.loefailist()
 while running:
 	root = tki.Tk()
 	root.protocol("WM_DELETE_WINDOW",sulgemine)
-	
+	root.title("Tegevuste list")
+	raam = tki.Frame(root)
+	raam.pack()
 
+	listbox_tegevused = tki.Listbox(raam, height=3, width=75)
+	listbox_tegevused.pack(side=tki.LEFT)
+	listboxyl()
+	kerimisriba_tegevused = tki.Scrollbar(raam)
+	kerimisriba_tegevused.pack(side=tki.RIGHT, fill=tki.Y)
+	listbox_tegevused.config(yscrollcommand=kerimisriba_tegevused)
+	kerimisriba_tegevused.config(command=listbox_tegevused.yview)
 
+	nupp_lisa_tegevus = tki.Button(root, text="Lisa Ülesanne", width=48, command=lisaylesanne)
+	nupp_lisa_tegevus.pack()
+
+	nupp_kustuta_tegevus = tki.Button(root, text="Kustuta Ülesanne", width=48, command=kustutaylesanne)
+	nupp_kustuta_tegevus.pack()
 
 	root.mainloop()
+
+
+
+
+
+
+#EI TEA
+	
 # andmed = []
 # jarjestatud_andmed = []
 # while True: 

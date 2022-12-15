@@ -28,8 +28,8 @@ class Ylesanne:
 	def __str__(self):
 		ajastamp = self.aegkuni()
 		if ajastamp < 0:
-			return f"{self.paev}.{self.kuu}.{self.aasta} {self.tund}:{self.minut}	{self.nimi}	MÖÖDUNUD"
-		return f"{self.paev}.{self.kuu}.{self.aasta} {self.tund}:{self.minut}	{self.nimi}	{floor(ajastamp/(60*60*24))}P {floor((ajastamp%(60*60*24)/(60*60)))}T {floor((ajastamp%(60*60)/(60)))}M"
+			return f"{str(self.paev).zfill(2)}.{str(self.kuu).zfill(2)}.{self.aasta} {str(self.tund).zfill(2)}:{str(self.minut).zfill(2)}   {self.nimi}   MÖÖDUNUD"
+		return f"{str(self.paev).zfill(2)}.{str(self.kuu).zfill(2)}.{self.aasta} {str(self.tund).zfill(2)}:{str(self.minut).zfill(2)}   {self.nimi}   {floor(ajastamp/(60*60*24))}P {floor((ajastamp%(60*60*24)/(60*60)))}T {floor((ajastamp%(60*60)/(60)))}M"
 	def aegkuni(self):
 		aegkuni = datetime(self.aasta,self.kuu,self.paev,self.tund,self.minut).timestamp() - datetime.now().timestamp()
 		return aegkuni
@@ -113,6 +113,7 @@ def kontrollikell(tund, minut):
 def loojalisaobjekt(nimi, paev, kuu, aasta, tund, minut, jrjnd=obj_jrjnd):
 	lisaobjekt = Ylesanne(nimi, paev, kuu, aasta, tund, minut)
 	jrjnd.append(lisaobjekt)
+	jrjnd.sort(key=lambda x: x.aegkuni())
 	return jrjnd
 
 # IDEED
